@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C839A411947B43B0066BE2B /* BSKReporters.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C839A401947B43B0066BE2B /* BSKReporters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CC8BD5219114CB400AC2516 /* BSKReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC8BD5019114CB400AC2516 /* BSKReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CC8BD5319114CB400AC2516 /* BSKReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BD5119114CB400AC2516 /* BSKReporter.m */; };
+		2CC8BD5619114DA000AC2516 /* BSKBugReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC8BD5419114DA000AC2516 /* BSKBugReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CC8BD5719114DA000AC2516 /* BSKBugReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BD5519114DA000AC2516 /* BSKBugReport.m */; };
+		2CC8BD5A1911525A00AC2516 /* BSKEmailReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC8BD581911525A00AC2516 /* BSKEmailReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CC8BD5B1911525A00AC2516 /* BSKEmailReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BD591911525A00AC2516 /* BSKEmailReporter.m */; };
 		4C15DA34188F48E400767C78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C15DA33188F48E400767C78 /* Foundation.framework */; };
 		4C15DA3A188F48E400767C78 /* BugshotKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15DA39188F48E400767C78 /* BugshotKit.m */; };
 		4C15DA59188F491000767C78 /* BSKAnnotationArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15DA41188F491000767C78 /* BSKAnnotationArrowView.m */; };
@@ -29,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C839A401947B43B0066BE2B /* BSKReporters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKReporters.h; sourceTree = "<group>"; };
+		2CC8BD5019114CB400AC2516 /* BSKReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKReporter.h; sourceTree = "<group>"; };
+		2CC8BD5119114CB400AC2516 /* BSKReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKReporter.m; sourceTree = "<group>"; };
+		2CC8BD5419114DA000AC2516 /* BSKBugReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKBugReport.h; sourceTree = "<group>"; };
+		2CC8BD5519114DA000AC2516 /* BSKBugReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKBugReport.m; sourceTree = "<group>"; };
+		2CC8BD581911525A00AC2516 /* BSKEmailReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKEmailReporter.h; sourceTree = "<group>"; };
+		2CC8BD591911525A00AC2516 /* BSKEmailReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKEmailReporter.m; sourceTree = "<group>"; };
 		4C15DA30188F48E400767C78 /* libBugshotKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBugshotKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C15DA33188F48E400767C78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C15DA37188F48E400767C78 /* BugshotKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BugshotKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -74,6 +88,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CC8BD5C1911526100AC2516 /* Reporters */ = {
+			isa = PBXGroup;
+			children = (
+				2CC8BD5019114CB400AC2516 /* BSKReporter.h */,
+				2CC8BD5119114CB400AC2516 /* BSKReporter.m */,
+				2C839A401947B43B0066BE2B /* BSKReporters.h */,
+				2CC8BD581911525A00AC2516 /* BSKEmailReporter.h */,
+				2CC8BD591911525A00AC2516 /* BSKEmailReporter.m */,
+			);
+			name = Reporters;
+			sourceTree = "<group>";
+		};
 		4C15DA25188F48E300767C78 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +128,7 @@
 		4C15DA35188F48E400767C78 /* BugshotKit */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8BD5C1911526100AC2516 /* Reporters */,
 				4C15DA38188F48E400767C78 /* BugshotKit.h */,
 				4C15DA39188F48E400767C78 /* BugshotKit.m */,
 				4C15DA40188F491000767C78 /* BSKAnnotationArrowView.h */,
@@ -112,6 +139,8 @@
 				4C15DA45188F491000767C78 /* BSKAnnotationBoxView.m */,
 				4C15DA46188F491000767C78 /* BSKAnnotationView.h */,
 				4C15DA47188F491000767C78 /* BSKAnnotationView.m */,
+				2CC8BD5419114DA000AC2516 /* BSKBugReport.h */,
+				2CC8BD5519114DA000AC2516 /* BSKBugReport.m */,
 				4C15DA48188F491000767C78 /* BSKCheckerboardView.h */,
 				4C15DA49188F491000767C78 /* BSKCheckerboardView.m */,
 				4C15DA4A188F491000767C78 /* BSKLogViewController.h */,
@@ -151,7 +180,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C15DA70188F49AB00767C78 /* BugshotKit.h in Headers */,
+				2CC8BD5A1911525A00AC2516 /* BSKEmailReporter.h in Headers */,
 				A9AF1AA418995AA90025693B /* MABGTimer.h in Headers */,
+				2CC8BD5219114CB400AC2516 /* BSKReporter.h in Headers */,
+				2CC8BD5619114DA000AC2516 /* BSKBugReport.h in Headers */,
+				2C839A411947B43B0066BE2B /* BSKReporters.h in Headers */,
 				4C15DA64188F491000767C78 /* BSKMainViewController.h in Headers */,
 				4C15DAA2188F563A00767C78 /* BSKWindow.h in Headers */,
 			);
@@ -241,6 +274,8 @@
 			files = (
 				4C15DA61188F491000767C78 /* BSKCheckerboardView.m in Sources */,
 				4C15DA6F188F491000767C78 /* UIImage+ImageEffects.m in Sources */,
+				2CC8BD5319114CB400AC2516 /* BSKReporter.m in Sources */,
+				2CC8BD5719114DA000AC2516 /* BSKBugReport.m in Sources */,
 				4C15DA5F188F491000767C78 /* BSKAnnotationView.m in Sources */,
 				4C15DA6D188F491000767C78 /* BSKWindow.m in Sources */,
 				4C15DA5D188F491000767C78 /* BSKAnnotationBoxView.m in Sources */,
@@ -251,6 +286,7 @@
 				4C15DA65188F491000767C78 /* BSKMainViewController.m in Sources */,
 				A9AF1AA518995AA90025693B /* MABGTimer.m in Sources */,
 				4C15DA69188F491000767C78 /* BSKScreenshotViewController.m in Sources */,
+				2CC8BD5B1911525A00AC2516 /* BSKEmailReporter.m in Sources */,
 				4C15DA67188F491000767C78 /* BSKNavigationController.m in Sources */,
 				4C15DA3A188F48E400767C78 /* BugshotKit.m in Sources */,
 			);
@@ -335,6 +371,11 @@
 				DSTROOT = /tmp/BugshotKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BugshotKit/BugshotKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/BugshotKit",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -347,6 +388,11 @@
 				DSTROOT = /tmp/BugshotKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BugshotKit/BugshotKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/BugshotKit",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

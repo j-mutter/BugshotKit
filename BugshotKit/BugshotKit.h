@@ -5,6 +5,7 @@
 #import <UIKit/UIKit.h>
 #import "BSKMainViewController.h"
 #import "BSKWindow.h"
+#import "BSKReporters.h"
 
 #if ! DEBUG
 #warning BugshotKit is being included in a non-debug build.
@@ -40,6 +41,9 @@ typedef enum : NSUInteger {
 
 + (void)addLogMessage:(NSString *)message;
 + (UIFont *)consoleFontWithSize:(CGFloat)size;
+
+@property (nonatomic, readonly) NSSet *reporters;
+- (void)addReporter:(BSKReporter *)reporter;
 
 @property (nonatomic, copy) NSString *destinationEmailAddress;
 @property (nonatomic) NSUInteger consoleLogMaxLines;

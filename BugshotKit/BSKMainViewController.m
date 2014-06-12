@@ -312,23 +312,43 @@ static UIImage *rotateIfNeeded(UIImage *src);
     
     NSData *userInfoJSON = [NSJSONSerialization dataWithJSONObject:userInfo options:NSJSONWritingPrettyPrinted error:NULL];
     
-    MFMailComposeViewController *mf = [MFMailComposeViewController canSendMail] ? [[MFMailComposeViewController alloc] init] : nil;
-    if (! mf) {
-        NSString *msg = [NSString stringWithFormat:@"Mail is not configured on your %@.", UIDevice.currentDevice.localizedModel];
-        [[[UIAlertView alloc] initWithTitle:@"Cannot Send Mail" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        return;
-    }
-    
-    mf.toRecipients = [BugshotKit.sharedManager.destinationEmailAddress componentsSeparatedByString:@","];
-    mf.subject = BugshotKit.sharedManager.emailSubjectBlock ? BugshotKit.sharedManager.emailSubjectBlock(userInfo) : [NSString stringWithFormat:@"%@ %@ Feedback", appNameString, appVersionString];
-    [mf setMessageBody:BugshotKit.sharedManager.emailBodyBlock ? BugshotKit.sharedManager.emailBodyBlock(userInfo) : nil isHTML:NO];
+	BSKBugReport *report = [[BSKBugReport alloc] init];
+	
+	report.title = BugshotKit.sharedManager.emailSubjectBlock ? BugshotKit.sharedManager.emailSubjectBlock(userInfo) : [NSString stringWithFormat:@"%@ %@ Feedback", appNameString, appVersionString];
+	report.description = BugshotKit.sharedManager.emailBodyBlock ? BugshotKit.sharedManager.emailBodyBlock(userInfo) : nil;
+	report.log = log;
+	report.screenshot = screenshot;
+	report.userInfo = userInfoJSON;
+	
+	[self submitReport:report];
+	
+//    MFMailComposeViewController *mf = [MFMailComposeViewController canSendMail] ? [[MFMailComposeViewController alloc] init] : nil;
+//    if (! mf) {
+//        NSString *msg = [NSString stringWithFormat:@"Mail is not configured on your %@.", UIDevice.currentDevice.localizedModel];
+//        [[[UIAlertView alloc] initWithTitle:@"Cannot Send Mail" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//        return;
+//    }
+//    
+//    mf.toRecipients = [BugshotKit.sharedManager.destinationEmailAddress componentsSeparatedByString:@","];
+//    mf.subject = BugshotKit.sharedManager.emailSubjectBlock ? BugshotKit.sharedManager.emailSubjectBlock(userInfo) : [NSString stringWithFormat:@"%@ %@ Feedback", appNameString, appVersionString];
+//    [mf setMessageBody:BugshotKit.sharedManager.emailBodyBlock ? BugshotKit.sharedManager.emailBodyBlock(userInfo) : nil isHTML:NO];
+//
+//    if (screenshot) [mf addAttachmentData:UIImagePNGRepresentation(rotateIfNeeded(screenshot)) mimeType:@"image/png" fileName:@"screenshot.png"];
+//    if (log) [mf addAttachmentData:[log dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/plain" fileName:@"log.txt"];
+//    if (userInfoJSON) [mf addAttachmentData:userInfoJSON mimeType:@"application/json" fileName:@"info.json"];
+//
+//    mf.mailComposeDelegate = self;
+//    [self presentViewController:mf animated:YES completion:NULL];
+}
 
-    if (screenshot) [mf addAttachmentData:UIImagePNGRepresentation(rotateIfNeeded(screenshot)) mimeType:@"image/png" fileName:@"screenshot.png"];
-    if (log) [mf addAttachmentData:[log dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/plain" fileName:@"log.txt"];
-    if (userInfoJSON) [mf addAttachmentData:userInfoJSON mimeType:@"application/json" fileName:@"info.json"];
-
-    mf.mailComposeDelegate = self;
-    [self presentViewController:mf animated:YES completion:NULL];
+- (void)submitReport:(BSKBugReport *)report
+{
+	for (BSKReporter *reporter in [BugshotKit sharedManager].reporters) {
+		if ([reporter class] == [BSKEmailReporter class]) {
+			((BSKEmailReporter*)reporter).controller = self;
+		}
+		[reporter submitReport:report error:nil];
+	}
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -371,20 +391,3 @@ static UIImage *rotateIfNeeded(UIImage *src);
 }
 
 @end
-
-
-// By Matteo Gavagnin on 21/01/14.
-static UIImage *rotateIfNeeded(UIImage *src)
-{
-    if (src.imageOrientation == UIImageOrientationDown && src.size.width < src.size.height) {
-        UIGraphicsBeginImageContext(src.size);
-        [src drawAtPoint:CGPointMake(0, 0)];
-        return UIGraphicsGetImageFromCurrentImageContext();
-    } else if ((src.imageOrientation == UIImageOrientationLeft || src.imageOrientation == UIImageOrientationRight) && src.size.width > src.size.height) {
-        UIGraphicsBeginImageContext(src.size);
-        [src drawAtPoint:CGPointMake(0, 0)];
-        return UIGraphicsGetImageFromCurrentImageContext();
-    } else {
-        return src;
-    }
-}

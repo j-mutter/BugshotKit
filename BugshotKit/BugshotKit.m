@@ -53,7 +53,9 @@ UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
 
 @end
 
-@implementation BugshotKit
+@implementation BugshotKit {
+	NSMutableSet *_reporters;
+}
 
 + (instancetype)sharedManager
 {
@@ -157,6 +159,8 @@ UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
         
         self.consoleRefreshThrottler = [[BSK_MABGTimer alloc] initWithObject:self behavior:BSK_MABGTimerCoalesce queueLabel:"BugshotKit console throttler"];
         [self.consoleRefreshThrottler setTargetQueue:self.logQueue];
+		
+		_reporters = [NSMutableSet set];
         
         [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(newWindowDidBecomeVisible:) name:UIWindowDidBecomeVisibleNotification object:nil];
         
@@ -422,6 +426,12 @@ UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
     self.snapshotImage = nil;
     self.annotatedImage = nil;
     self.annotations = nil;
+}
+
+#pragma mark - Reporters
+- (void)addReporter:(BSKReporter *)reporter
+{
+	[_reporters addObject:reporter];
 }
 
 #pragma mark - Console logging
